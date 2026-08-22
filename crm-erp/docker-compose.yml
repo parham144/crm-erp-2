@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: parsys_web
+    ports:
+      - "3005:3005"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://parsys_admin:SecurePass123!@db:5432/parsys_erp
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: postgres:15-alpine
+    container_name: parsys_db
+    environment:
+      POSTGRES_USER: parsys_admin
+      POSTGRES_PASSWORD: SecurePass123!
+      POSTGRES_DB: parsys_erp
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  pgdata:
+    name: parsys_pg_data

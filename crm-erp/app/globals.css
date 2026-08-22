@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-neutral-50 text-neutral-800;
+  }
+}
+
+.dir-ltr {
+  direction: ltr;
+  display: inline-block;
+}
